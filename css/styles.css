@@ -1,0 +1,47 @@
+#div1{
+    background-color: gray;
+    height: 40px;
+}
+
+#div2{
+    background-color: gray;
+    height: 40px;
+}
+
+#title{
+    font-family: monospace;
+    font-size: x-large;
+}
+
+#progress{
+    text-align: center; 
+    
+}
+
+#body{
+    text-align: center;
+    
+}
+
+#title2{
+    font-family: monospace;
+    
+}
+
+#name{
+    color:red;
+}
+
+#temp{
+    color:gray;
+}
+
+#description{
+    color:yellow;
+    
+}
+
+#title{
+    font-family: monospace;
+    color: red;
+}

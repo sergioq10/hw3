@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title id="title">Weather</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link href="css/styles.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        
+    </head>
+    <body id="body">
+        <div id="div1"></div>
+        <form id="form">
+        <div id="title">
+        <h1 id="title" class="jumbotron text-center" >Check your Weather by zip code!</h1>
+        <h5 id="title2">Enter a 5 digit zipcode.</h5>
+        </div> 
+        <progress id="progress"></progress><br>
+            <input type="text" class="form-control" id="zip"><br>
+            <input id="clickMe" class="btn btn-dark" type="button" value="Submit"/> <!-- button will call function  onclick="getWeather();"--> 
+       
+       <div class="better"> 
+              <p class="name" id="name"></p>
+              <p class="temp" id="temp"></p>
+              <p class="description" id="description"></p>
+       </div> 
+       </form> <!--end of form --> 
+        <div id="div2"></div>
+        
+        <script> // js 
+       
+           // listener
+          $("clickMe").click(function(){
+                 
+         function getWeather() {
+          
+          //validation of zip being 5 digits
+          if(("#zip").val() !== 5 ) {
+              alert("The zip entered will not work try again.");
+          } else{ 
+              
+                $.ajax({
+                method: "GET",
+                url: "http://api.openweathermap.org/data/2.5/weather?zip="+$("#zip").val()+"&appid=c4486ace4e867a37260598eaf942aee4" , //http or https depending on link
+                dataType: "json", //type
+                data: {"zip" : $("#zip").val(),
+                       "units" : "imperial",
+                        "APPID" : "c4486ace4e867a37260598eaf942aee4"}, //parameters 
+                success: function(result,status) {
+                 
+                    function weatherCallback(weatherData){ //retieves and return
+                        var name = weatherData.name;
+                        var temp = weatherData.main[0].temp;
+                        var description = weatherData.weather[2].description; 
+                
+                        $(".name").append("The name of the city you selected is " + name);
+                        $(".temp").append("The current temperature is " + temp);
+                        $(".description").append("Therefore the day will seem" + description);
+            
+                }// end of weatherCallback
+               } //success 
+              }); //end of ajax
+             }//else
+            }//wweather
+          }); //listener
+        </script>
+    
+    </body>
+    <footer>
+    </footer>
+    
+</html>
